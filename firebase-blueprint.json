@@ -1,0 +1,138 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Student profile and learning progress",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "displayName": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "format": "email", "maxLength": 150 },
+        "photoURL": { "type": "string", "maxLength": 500 },
+        "enrolledCourseIds": { "type": "array" },
+        "completedLessonIds": { "type": "array" },
+        "bookmarkedNoteIds": { "type": "array" },
+        "remindedLiveClassIds": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "displayName", "email", "enrolledCourseIds", "completedLessonIds", "bookmarkedNoteIds", "remindedLiveClassIds", "createdAt", "updatedAt"]
+    },
+    "LessonNote": {
+      "title": "LessonNote",
+      "description": "Student private note for a specific lesson",
+      "type": "object",
+      "properties": {
+        "lessonId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "courseId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "content": { "type": "string", "maxLength": 5000 },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["lessonId", "courseId", "content", "updatedAt"]
+    },
+    "CourseItem": {
+      "title": "CourseItem",
+      "description": "Admin-managed Humanities admission course",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "title": { "type": "string", "maxLength": 200 },
+        "category": { "type": "string", "enum": ["bangla", "english", "gk", "written"] },
+        "categoryLabel": { "type": "string", "maxLength": 50 },
+        "subject": { "type": "string", "maxLength": 80 },
+        "instructorName": { "type": "string", "maxLength": 100 },
+        "instructorCredential": { "type": "string", "maxLength": 150 },
+        "videoUrl": { "type": "string", "maxLength": 500 },
+        "pdfUrl": { "type": "string", "maxLength": 500 },
+        "totalDuration": { "type": "string", "maxLength": 60 },
+        "description": { "type": "string", "maxLength": 1000 },
+        "createdBy": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "title", "category", "categoryLabel", "subject", "instructorName", "instructorCredential", "totalDuration", "description", "createdBy", "createdAt", "updatedAt"]
+    },
+    "LiveClassItem": {
+      "title": "LiveClassItem",
+      "description": "Admin-managed live class schedule",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "title": { "type": "string", "maxLength": 200 },
+        "subject": { "type": "string", "maxLength": 80 },
+        "category": { "type": "string", "enum": ["bangla", "english", "gk", "written"] },
+        "categoryLabel": { "type": "string", "maxLength": 50 },
+        "instructorName": { "type": "string", "maxLength": 100 },
+        "instructorCredential": { "type": "string", "maxLength": 150 },
+        "scheduleTime": { "type": "string", "maxLength": 80 },
+        "duration": { "type": "string", "maxLength": 40 },
+        "status": { "type": "string", "enum": ["live", "upcoming"] },
+        "meetingUrl": { "type": "string", "maxLength": 500 },
+        "topics": { "type": "array" },
+        "createdBy": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "title", "subject", "category", "categoryLabel", "instructorName", "instructorCredential", "scheduleTime", "duration", "status", "topics", "createdBy", "createdAt"]
+    },
+    "QuizQuestionItem": {
+      "title": "QuizQuestionItem",
+      "description": "Admin-created custom MCQ question for Model Tests",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "testId": { "type": "string", "maxLength": 128 },
+        "subject": { "type": "string", "maxLength": 80 },
+        "question": { "type": "string", "maxLength": 500 },
+        "options": { "type": "array" },
+        "correctIndex": { "type": "number" },
+        "explanation": { "type": "string", "maxLength": 1000 },
+        "createdBy": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "testId", "subject", "question", "options", "correctIndex", "explanation", "createdBy", "createdAt"]
+    },
+    "LeaderboardEntry": {
+      "title": "LeaderboardEntry",
+      "description": "Public-safe student model test score for Confirm DU leaderboard",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "studentName": { "type": "string", "maxLength": 100 },
+        "testId": { "type": "string", "maxLength": 128 },
+        "testTitle": { "type": "string", "maxLength": 200 },
+        "score": { "type": "number" },
+        "total": { "type": "number" },
+        "accuracy": { "type": "number" },
+        "isPublic": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "studentName", "testId", "testTitle", "score", "total", "accuracy", "isPublic", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Private student profile and progress"
+    },
+    "/users/{userId}/lessonNotes/{lessonId}": {
+      "schema": { "$ref": "#/entities/LessonNote" },
+      "description": "Student private lesson notes"
+    },
+    "/courses/{courseId}": {
+      "schema": { "$ref": "#/entities/CourseItem" },
+      "description": "Admin-managed courses catalog"
+    },
+    "/liveClasses/{liveClassId}": {
+      "schema": { "$ref": "#/entities/LiveClassItem" },
+      "description": "Admin-managed live class schedule"
+    },
+    "/quizQuestions/{questionId}": {
+      "schema": { "$ref": "#/entities/QuizQuestionItem" },
+      "description": "Admin-managed model test questions"
+    },
+    "/leaderboard/{attemptId}": {
+      "schema": { "$ref": "#/entities/LeaderboardEntry" },
+      "description": "Model test leaderboard scores (no PII)"
+    }
+  }
+}

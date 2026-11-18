@@ -1,0 +1,6 @@
+{
+  "name": "পাঠশালা ১০ — অনলাইন লার্নিং প্ল্যাটফর্ম",
+  "description": "এসএসসি, এইচএসসি, বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি ও দক্ষতা উন্নয়নের জন্য ইন্টারেক্টিভ বাংলা এডুকেশনাল প্ল্যাটফর্ম।",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
